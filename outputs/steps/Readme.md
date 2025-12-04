@@ -14,14 +14,11 @@ The system starts from the **Checkpoint 2** embeddings (NPZ files) and continuou
 
 ## 📁 1. Project Structure
 
-Assuming your base folder is:
+Lets take the basic folder structure example is:
 
 ```text
 C:\Users\punna\Downloads\IMRS
 The key layout is:
-
-text
-Copy code
 IMRS/
 ├─ 256_ObjectCategories/              
 ├─ 256_ObjectCategories_proc/         # Preprocessed dataset (Checkpoint 1)
@@ -46,8 +43,7 @@ runs/streamlit_state
 ⚙️ 2. Environment Setup
 From the IMRS folder:
 
-powershell
-Copy code
+use powershell and run:
 cd C:\Users\punna\Downloads\IMRS
 
 # (If not already done) create venv
@@ -69,8 +65,8 @@ You may already have most of these from Checkpoint 2; just fill in the missing o
 🧪 3. Re-run Checkpoint Benchmarks
 If you want to regenerate embeddings / NPZs:
 
-powershell
-Copy code
+Use powershell to run:
+
 cd C:\Users\punna\Downloads\IMRS
 .\.venv\Scripts\Activate
 
@@ -81,15 +77,11 @@ python retrieval_framework.py bench `
   --indexers flat_ip hnsw ivf_pq annoy `
   --topk 50 --sample_queries 1500
 This writes NPZ embedding caches to:
-
-text
-Copy code
 runs/ckpt2/cache/emb_*.npz
 The Streamlit app will reuse and merge these automatically.
 
 🚀 4. Running the Streamlit App
-powershell
-Copy code
+Open powershell:
 cd C:\Users\punna\Downloads\IMRS
 .\.venv\Scripts\Activate
 
@@ -120,9 +112,6 @@ FAISS (IndexIDMap2) or
 Annoy (with a separate position→ID mapping).
 
 A central catalog maps IDs to image paths:
-
-python
-Copy code
 catalog[id] = {"path": ".../image.jpg"}
 When you query:
 
@@ -282,9 +271,6 @@ Go to the Batch Expansion tab.
 Provide terms:
 
 Textarea: type one term per line, e.g.:
-
-text
-Copy code
 minecraft sword
 rubik cube
 mario character
@@ -367,9 +353,6 @@ Convert all paths to signed 64-bit IDs.
 Remove duplicates by ID (first occurrence wins).
 
 Save merged file:
-
-text
-Copy code
 runs/streamlit_state/emb_merged_<backbone>.npz
 This merged NPZ becomes the active embedding source and keeps the system consistent across sessions.
 
